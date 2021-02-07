@@ -6,6 +6,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -32,8 +33,9 @@ public class User implements UserDetails {
     @Column (name= "password")
     private String password;
 
-    @Transient
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "roles")
+
+    @OneToMany(fetch = FetchType.EAGER,
+               cascade = CascadeType.ALL, mappedBy = "user")
     private Set<Role> roles;
 
     public User() {
@@ -95,6 +97,14 @@ public class User implements UserDetails {
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
+    }
+
+    public void addRole(Role role){
+        if (roles == null){
+            roles = new HashSet<>();
+        }
+        roles.add(role);
+        role.setUser(this);
     }
 
     @Override

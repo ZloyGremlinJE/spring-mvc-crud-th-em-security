@@ -1,6 +1,7 @@
 package web.dao;
 
 import org.springframework.stereotype.Repository;
+import web.model.Role;
 import web.model.User;
 
 import javax.persistence.EntityManager;
@@ -36,5 +37,10 @@ public class UserDAOImpl implements UserDAO {
         if (t != null) {
             entityManager.remove(t);
         }
+    }
+
+    @Override
+    public Role getRole(int theId) {
+        return entityManager.find(Role.class, theId);
     }
 }

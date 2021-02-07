@@ -3,6 +3,7 @@ package web.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import web.dao.UserDAO;
+import web.model.Role;
 import web.model.User;
 
 import javax.transaction.Transactional;
@@ -36,5 +37,10 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public void deleteUser(int theId) {
         userDAO.deleteUser(theId);
+    }
+
+    @Override
+    public Role getRole(int theId) {
+        return userDAO.getRole(theId);
     }
 }
