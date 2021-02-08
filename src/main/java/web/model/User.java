@@ -34,8 +34,14 @@ public class User implements UserDetails {
     private String password;
 
 
-    @OneToMany(fetch = FetchType.EAGER,
-               cascade = CascadeType.ALL, mappedBy = "user")
+    @ManyToMany(fetch= FetchType.EAGER,
+            cascade = {CascadeType.PERSIST, CascadeType.MERGE,
+                    CascadeType.DETACH, CascadeType.REFRESH})
+    @JoinTable(name="user_role",
+            joinColumns = @JoinColumn(name="user_id", referencedColumnName = "id"),
+            inverseJoinColumns =
+            @JoinColumn(name = "role_id",referencedColumnName = "id"))
+
     private Set<Role> roles;
 
     public User() {
@@ -104,7 +110,6 @@ public class User implements UserDetails {
             roles = new HashSet<>();
         }
         roles.add(role);
-        role.setUser(this);
     }
 
     @Override

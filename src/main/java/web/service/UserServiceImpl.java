@@ -7,6 +7,7 @@ import web.model.Role;
 import web.model.User;
 
 import javax.transaction.Transactional;
+import java.util.Collection;
 import java.util.List;
 
 @Service
@@ -40,7 +41,22 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Role getRole(int theId) {
-        return userDAO.getRole(theId);
+    public Collection<Role> findAll() {
+       return userDAO.findAll();
     }
+
+    @Override
+    public Role findOne(Integer id) {
+       return userDAO.findOne(id);
+    }
+
+//    @Override
+//    public Role getRole(int theId) {
+//        return userDAO.getRole(theId);
+//    }
+//
+//    @Override
+//    public void deleteRole(int theId) {
+//        userDAO.deleteRole(theId);
+//    }
 }

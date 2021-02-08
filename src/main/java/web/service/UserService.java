@@ -3,6 +3,7 @@ package web.service;
 import web.model.Role;
 import web.model.User;
 
+import java.util.Collection;
 import java.util.List;
 
 public interface UserService {
@@ -14,5 +15,11 @@ public interface UserService {
 
     void deleteUser(int theId);
 
-    Role getRole(int id);
+//    Role getRole(int id);
+//
+//    void deleteRole(int theId);
+
+    public Collection<Role> findAll() ;
+
+    public Role findOne(Integer id) ;
 }

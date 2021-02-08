@@ -38,11 +38,11 @@
 
         <label for="roles">User roles (multiple select):</label>
         <br/>
-        <select id="roles" class="form-control mb-4 col-4" placeholder="Role" multiple="multiple"  name="role_name">
+        <select id="roles" th:field="*{roles}" multiple="multiple" class="form-control mb-4 col-4" placeholder="Role"   >
 
             <option th:each="role : ${roles}"
                     th:value="${{role}}"
-                    th:text="${role}"></option>
+                    th:text="${role.name}"></option>
         </select>
 
         <button type="submit" class="btn btn-info col-2">Save</button>

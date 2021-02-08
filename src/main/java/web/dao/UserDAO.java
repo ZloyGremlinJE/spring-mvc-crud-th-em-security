@@ -3,6 +3,7 @@ package web.dao;
 import web.model.Role;
 import web.model.User;
 
+import java.util.Collection;
 import java.util.List;
 
 public interface UserDAO {
@@ -15,6 +16,12 @@ public interface UserDAO {
 
     void deleteUser(int theId);
 
-    Role getRole(int id);
+//    Role getRole(int id);
+//
+//    void deleteRole(int theId);
+
+    public Collection<Role> findAll() ;
+
+    public Role findOne(Integer id) ;
 
 }

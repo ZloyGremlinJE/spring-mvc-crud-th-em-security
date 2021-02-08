@@ -8,12 +8,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import web.model.Role;
-import web.model.RoleName;
 import web.model.User;
 import web.service.UserService;
 
-import java.util.*;
+import java.util.List;
 
 @Controller
 public class UserController {
@@ -32,19 +30,12 @@ public class UserController {
     public String showFormForAdd(Model theModel) {
         User theUser = new User();
         theModel.addAttribute("user", theUser);
-        theModel.addAttribute("roles", RoleName.values());
+        theModel.addAttribute("roles", userService.findAll());
         return "user-form";
     }
 
     @PostMapping("/saveUser")
-    public String saveUser(@ModelAttribute("user") User theUser, @RequestParam("role_name") String[] theRoleName) {
-        Set<Role> roles = theUser.getRoles();
-        if (roles != null) {
-            roles.clear();
-        }
-        for (String r : theRoleName) {
-            theUser.addRole(new Role(r));
-        }
+    public String saveUser(@ModelAttribute("user") User theUser) {
         userService.saveUser(theUser);
         return "redirect:/";
     }
@@ -54,7 +45,7 @@ public class UserController {
                                     Model theModel) {
         User theUser = userService.getUser(theId);
         theModel.addAttribute("user", theUser);
-        theModel.addAttribute("roles", theUser.getRoles());
+        //theModel.addAttribute("roles", userService.findAll());
         return "user-form";
     }
 
