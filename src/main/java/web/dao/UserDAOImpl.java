@@ -14,12 +14,6 @@ import java.util.List;
 @Repository
 public class UserDAOImpl implements UserDAO {
 
-    private HashMap<Integer, Role> ALL_ROLE = new HashMap<Integer, Role>(){{
-        put(0, new Role("Admin"));
-        put(1, new  Role("User"));
-        put(2, new Role("Manager"));
-    }};
-
     @PersistenceContext
     protected EntityManager entityManager;
 

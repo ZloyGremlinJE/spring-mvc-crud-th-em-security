@@ -35,7 +35,10 @@ public class UserController {
     }
 
     @PostMapping("/saveUser")
-    public String saveUser(@ModelAttribute("user") User theUser) {
+    public String saveUser(@ModelAttribute("user") User theUser ) {
+        if(theUser.getId()==0){
+            
+        }
         userService.saveUser(theUser);
         return "redirect:/";
     }

@@ -7,6 +7,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -34,15 +35,9 @@ public class User implements UserDetails {
     private String password;
 
 
-    @ManyToMany(fetch= FetchType.EAGER,
-            cascade = {CascadeType.PERSIST, CascadeType.MERGE,
-                    CascadeType.DETACH, CascadeType.REFRESH})
-    @JoinTable(name="user_role",
-            joinColumns = @JoinColumn(name="user_id", referencedColumnName = "id"),
-            inverseJoinColumns =
-            @JoinColumn(name = "role_id",referencedColumnName = "id"))
-
-    private Set<Role> roles;
+    @ManyToMany(fetch = FetchType.EAGER,
+            cascade = {CascadeType.PERSIST,CascadeType.MERGE})
+    private Set<Role> roles = new HashSet<>();
 
     public User() {
 
@@ -106,9 +101,6 @@ public class User implements UserDetails {
     }
 
     public void addRole(Role role){
-        if (roles == null){
-            roles = new HashSet<>();
-        }
         roles.add(role);
     }
 
@@ -142,4 +134,16 @@ public class User implements UserDetails {
         return "User [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + "]";
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return firstName.equals(user.firstName) && lastName.equals(user.lastName) && email.equals(user.email) && Objects.equals(userName, user.userName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(firstName, lastName, email, userName);
+    }
 }
