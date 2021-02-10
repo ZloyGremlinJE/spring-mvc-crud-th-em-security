@@ -38,10 +38,11 @@
 
         <label for="roles">User roles (multiple select):</label>
         <br/>
-        <select id="roles" th:field="*{roles}" multiple="multiple" class="form-control mb-4 col-4">
+        <select id="roles" th:field="*{roles}" multiple="multiple" class="form-control mb-4 col-4" name="roles">
 
             <option th:each="role : ${roles}"
-                    th:value="${{role.name}}"
+                    th:value="${{role.id}}"
+                    th:selected="${#lists.contains(user.roles,role)}"
                     th:text="${role.name}"></option>
         </select>
 

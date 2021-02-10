@@ -8,7 +8,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
 
 @Repository
@@ -27,14 +26,6 @@ public class UserDAOImpl implements UserDAO {
     public void saveUser(User theUser) {
         entityManager.merge(theUser);
     }
-
-//    private boolean exists(User theUser) {
-//        try {
-//            return entityManager.getReference(User.class, theUser.getId()) != null;
-//        } catch (EntityNotFoundException e) {
-//            return false;
-//        }
-//    }
 
     @Override
     public User getUser(int theId) {

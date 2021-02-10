@@ -20,24 +20,19 @@ public class Role implements GrantedAuthority {
     @Column(name = "name")
     private String name;
 
-//    @ManyToOne(cascade= {CascadeType.PERSIST, CascadeType.MERGE,
-//            CascadeType.DETACH, CascadeType.REFRESH})
-//    @JoinColumn(name="user_id")
-//    private User user;
-
     @ManyToMany(mappedBy = "roles")
-    private List<User> users = new ArrayList<>();
+    private Set<User> users = new HashSet<>();
 
 
-    public List<User> getUsers() {
+    public Set<User> getUsers() {
         return users;
     }
 
-    public void setUsers(List<User> users) {
+    public void setUsers(Set<User> users) {
         this.users = users;
     }
 
-    public void addUser(User theUser){
+    public void addUser(User theUser) {
         users.add(theUser);
     }
 
@@ -57,18 +52,11 @@ public class Role implements GrantedAuthority {
         this.name = name;
     }
 
-//    public User getUser() {
-//        return user;
-//    }
-//
-//    public void setUser(User user) {
-//        this.user = user;
-//    }
-
     public Role(int id, String name) {
         this.id = id;
         this.name = name;
     }
+
     public Role(String name) {
         this.name = name;
     }
@@ -78,10 +66,17 @@ public class Role implements GrantedAuthority {
         return name;
     }
 
+//    @Override
+//    public String toString() {
+//        return String.valueOf(id);
+//    }
+
+
     @Override
     public String toString() {
         return "Role{" +
-                "name='" + name + '\'' +
+                "id=" + id +
+                ", name='" + name + '\'' +
                 '}';
     }
 
@@ -89,12 +84,17 @@ public class Role implements GrantedAuthority {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+
         Role role = (Role) o;
+
+        if (id != role.id) return false;
         return name.equals(role.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name);
+        int result = id;
+        result = 31 * result + name.hashCode();
+        return result;
     }
 }

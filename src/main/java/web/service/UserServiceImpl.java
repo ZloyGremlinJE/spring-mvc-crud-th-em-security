@@ -42,21 +42,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Collection<Role> findAll() {
-       return userDAO.findAll();
+        return userDAO.findAll();
     }
 
     @Override
     public Role findOne(Integer id) {
-       return userDAO.findOne(id);
+        return userDAO.findOne(id);
     }
-
-//    @Override
-//    public Role getRole(int theId) {
-//        return userDAO.getRole(theId);
-//    }
-//
-//    @Override
-//    public void deleteRole(int theId) {
-//        userDAO.deleteRole(theId);
-//    }
 }

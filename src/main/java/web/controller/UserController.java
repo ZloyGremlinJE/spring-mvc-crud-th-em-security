@@ -35,10 +35,18 @@ public class UserController {
     }
 
     @PostMapping("/saveUser")
-    public String saveUser(@ModelAttribute("user") User theUser ) {
-        if(theUser.getId()==0){
-            
+    public String saveUser(@ModelAttribute("user") User theUser, @RequestParam("roles") String[] roles){
+
+
+        if(theUser.getId()!=0){
+           theUser = userService.getUser(theUser.getId());
         }
+            theUser.getRoles().clear();
+            for (String r:roles) {
+                theUser.addRole(userService.findOne(Integer.parseInt(r)));
+            }
+
+
         userService.saveUser(theUser);
         return "redirect:/";
     }
@@ -48,7 +56,7 @@ public class UserController {
                                     Model theModel) {
         User theUser = userService.getUser(theId);
         theModel.addAttribute("user", theUser);
-        //theModel.addAttribute("roles", userService.findAll());
+        theModel.addAttribute("roles", userService.findAll());
         return "user-form";
     }
 
