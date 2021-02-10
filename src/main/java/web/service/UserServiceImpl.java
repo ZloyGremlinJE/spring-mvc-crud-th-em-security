@@ -40,13 +40,5 @@ public class UserServiceImpl implements UserService {
         userDAO.deleteUser(theId);
     }
 
-    @Override
-    public Collection<Role> findAll() {
-        return userDAO.findAll();
-    }
 
-    @Override
-    public Role findOne(Integer id) {
-        return userDAO.findOne(id);
-    }
 }

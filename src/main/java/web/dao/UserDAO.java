@@ -16,8 +16,6 @@ public interface UserDAO {
 
     void deleteUser(int theId);
 
-    public Collection<Role> findAll();
 
-    public Role findOne(Integer id);
 
 }

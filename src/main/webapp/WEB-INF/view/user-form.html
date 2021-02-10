@@ -27,36 +27,42 @@
         <!-- Add hidden form field to handle update -->
         <input type="hidden" th:field="*{id}"/>
 
-        <input type="text" th:field="*{firstName}"
-               class="form-control mb-4 col-4" placeholder="First name">
+        <input type="text" th:field="*{userName}"
+                class="form-control mb-4 col-4" placeholder="login">
 
-        <input type="text" th:field="*{lastName}"
-               class="form-control mb-4 col-4" placeholder="Last name">
+         <input type="text" th:field="*{firstName}"
+                class="form-control mb-4 col-4" placeholder="First name">
 
-        <input type="text" th:field="*{email}"
-               class="form-control mb-4 col-4" placeholder="Email">
+         <input type="text" th:field="*{lastName}"
+                class="form-control mb-4 col-4" placeholder="Last name">
 
-        <label for="roles">User roles (multiple select):</label>
-        <br/>
-        <select id="roles" th:field="*{roles}" multiple="multiple" class="form-control mb-4 col-4" name="roles">
+         <input type="text" th:field="*{email}"
+                class="form-control mb-4 col-4" placeholder="Email">
 
-            <option th:each="role : ${roles}"
-                    th:value="${{role.id}}"
-                    th:selected="${#lists.contains(user.roles,role)}"
-                    th:text="${role.name}"></option>
-        </select>
+         <input type="password" th:field="*{password}"
+                class="form-control mb-4 col-4" placeholder="password">
 
-        <button type="submit" class="btn btn-info col-2">Save</button>
+         <label for="roles">User roles (multiple select):</label>
+         <br/>
+         <select id="roles"  multiple="multiple" class="form-control mb-4 col-4" name="roles">
 
-    </form>
+             <option th:each="role : ${roles}"
+                     th:value="${{role.id}}"
+                     th:selected="${#lists.contains(user.roles,role)}"
+                     th:text="${role.name}"></option>
+         </select>
 
-    <hr>
-    <a th:href="@{/}">Back to User List</a>
+         <button type="submit" class="btn btn-info col-2">Save</button>
 
-</div>
-</body>
+     </form>
 
-</html>
+     <hr>
+     <a th:href="@{/}">Back to User List</a>
+
+ </div>
+ </body>
+
+ </html>
 
 
 

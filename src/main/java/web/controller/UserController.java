@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import web.dao.RoleDAO;
 import web.model.User;
+import web.service.RoleService;
 import web.service.UserService;
 
 import java.util.List;
@@ -18,6 +20,9 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private RoleService roleService;
 
     @GetMapping("/")
     public String listCustomers(Model theModel) {
@@ -30,7 +35,7 @@ public class UserController {
     public String showFormForAdd(Model theModel) {
         User theUser = new User();
         theModel.addAttribute("user", theUser);
-        theModel.addAttribute("roles", userService.findAll());
+        theModel.addAttribute("roles", roleService.findAll());
         return "user-form";
     }
 
@@ -43,7 +48,7 @@ public class UserController {
         }
             theUser.getRoles().clear();
             for (String r:roles) {
-                theUser.addRole(userService.findOne(Integer.parseInt(r)));
+                theUser.addRole(roleService.getRole(Integer.parseInt(r)));
             }
 
 
@@ -56,7 +61,7 @@ public class UserController {
                                     Model theModel) {
         User theUser = userService.getUser(theId);
         theModel.addAttribute("user", theUser);
-        theModel.addAttribute("roles", userService.findAll());
+        theModel.addAttribute("roles", roleService.findAll());
         return "user-form";
     }
 

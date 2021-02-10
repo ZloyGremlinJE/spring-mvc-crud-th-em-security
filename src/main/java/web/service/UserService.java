@@ -15,11 +15,5 @@ public interface UserService {
 
     void deleteUser(int theId);
 
-//    Role getRole(int id);
-//
-//    void deleteRole(int theId);
 
-    public Collection<Role> findAll() ;
-
-    public Role findOne(Integer id) ;
 }

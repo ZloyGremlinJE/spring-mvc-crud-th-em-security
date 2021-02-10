@@ -19,6 +19,9 @@ public class User implements UserDetails {
     @Column(name = "id")
     private int id;
 
+    @Column (name = "user_name")
+    private String userName;
+
     @Column(name = "first_name")
     private String firstName;
 
@@ -27,9 +30,6 @@ public class User implements UserDetails {
 
     @Column(name = "email")
     private String email;
-
-    @Column (name = "user_name")
-    private String userName;
 
     @Column (name= "password")
     private String password;
@@ -51,8 +51,8 @@ public class User implements UserDetails {
         this.id = id;
     }
 
-    @Override
-    public String getUsername() {
+
+    public String getUserName() {
         return userName;
     }
 
@@ -86,6 +86,11 @@ public class User implements UserDetails {
 
     public String getPassword() {
         return password;
+    }
+
+    @Override
+    public String getUsername() {
+        return userName;
     }
 
     public void setPassword(String password) {

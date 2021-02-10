@@ -40,31 +40,7 @@ public class UserDAOImpl implements UserDAO {
         }
     }
 
-//    @Override
-//    public Role getRole(int theId) {
-//        return entityManager.find(Role.class, theId);
-//    }
-//
-//    @Override
-//    public void deleteRole(int theId) {
-//        Role t = entityManager.find(Role.class, theId);
-//        if (t != null) {
-//            entityManager.remove(t);
-//        }
-//    }
 
-    @Override
-    public Collection<Role> findAll() {
-        Query query = entityManager.createQuery("select r from Role r ");
-        return query.getResultList();
-    }
-
-
-    @Override
-    public Role findOne(Integer id) {
-        Role t = entityManager.find(Role.class, id);
-        return t;
-    }
 
 
 }
