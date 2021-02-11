@@ -44,7 +44,7 @@
 
          <label for="roles">User roles (multiple select):</label>
          <br/>
-         <select id="roles"  multiple="multiple" class="form-control mb-4 col-4" name="roles">
+         <select id="roles" required multiple="multiple" class="form-control mb-4 col-4" name="roles">
 
              <option th:each="role : ${roles}"
                      th:value="${{role.id}}"

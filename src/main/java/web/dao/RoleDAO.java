@@ -10,4 +10,5 @@ public interface RoleDAO {
 
     public Role getRole(int id);
 
+
 }

@@ -9,4 +9,5 @@ public interface RoleService {
     public Collection<Role> findAll();
 
     public Role getRole(int id);
+
 }

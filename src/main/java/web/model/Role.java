@@ -1,14 +1,13 @@
 package web.model;
 
-import org.springframework.security.core.GrantedAuthority;
-
 import javax.persistence.*;
-import java.util.*;
+import java.util.HashSet;
+import java.util.Set;
 
 
 @Entity
 @Table(name = "roles")
-public class Role implements GrantedAuthority {
+public class Role {//implements GrantedAuthority {
     public Role() {
     }
 
@@ -61,10 +60,10 @@ public class Role implements GrantedAuthority {
         this.name = name;
     }
 
-    @Override
-    public String getAuthority() {
-        return name;
-    }
+    //@Override
+//    public String getAuthority() {
+//        return name;
+//    }
 
 //    @Override
 //    public String toString() {
