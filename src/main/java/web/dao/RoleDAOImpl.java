@@ -16,7 +16,7 @@ public class RoleDAOImpl implements RoleDAO {
 
     @Override
     public Collection<Role> findAll() {
-        Query query = entityManager.createQuery("select r from Role r ");
+        Query query = entityManager.createQuery("select r from Role r");
         return query.getResultList();
     }
 
