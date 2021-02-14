@@ -32,18 +32,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         // http.csrf().disable(); - попробуйте выяснить сами, что это даёт
 
         http.authorizeRequests()
-                //.antMatchers("/").permitAll() // доступность всем
-                .antMatchers("/").access("hasAnyRole('ADMIN')") // разрешаем входить на /user пользователям с ролью User
-                .and().formLogin()  // Spring сам подставит свою логин форму
-                .successHandler(successUserHandler); // подключаем наш SuccessHandler для перенеправления по ролям
-    }
+                .antMatchers("/users/list").hasAnyRole("ADMIN")
+                .antMatchers("/users/save").hasAnyRole("ADMIN", "USER")
+                .antMatchers("/users/delete").hasRole("ADMIN")
+                .antMatchers("/resources/**").permitAll()
+                .and()
+                .formLogin().successHandler(successUserHandler)
+                .loginPage("/login")
+                .loginProcessingUrl("/authenticateTheUser")
+                .permitAll()
+                .and()
+                .logout().permitAll()
+                .and()
+                .exceptionHandling().accessDeniedPage("/access-denied")
+        ;
 
-    // Необходимо для шифрования паролей
-    // В данном примере не используется, отключен
-//    @Bean
-//    public static NoOpPasswordEncoder passwordEncoder() {
-//        return (NoOpPasswordEncoder) NoOpPasswordEncoder.getInstance();
-//    }
+    }
 
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {

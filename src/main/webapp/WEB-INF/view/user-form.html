@@ -1,5 +1,6 @@
 <!DOCTYPE HTML>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
 <head>
     <!-- Required meta tags -->
@@ -22,47 +23,59 @@
 
     <p class="h4 mb-4">Save User</p>
 
-    <form action="#" th:action="@{/saveUser}"
+    <form action="#" th:action="@{/users/saveUser}"
           th:object="${user}" method="POST">
         <!-- Add hidden form field to handle update -->
         <input type="hidden" th:field="*{id}"/>
 
         <input type="text" th:field="*{userName}"
-                class="form-control mb-4 col-4" placeholder="login">
+               class="form-control mb-4 col-4" placeholder="login">
 
-         <input type="text" th:field="*{firstName}"
-                class="form-control mb-4 col-4" placeholder="First name">
+        <input type="text" th:field="*{firstName}"
+               class="form-control mb-4 col-4" placeholder="First name">
 
-         <input type="text" th:field="*{lastName}"
-                class="form-control mb-4 col-4" placeholder="Last name">
+        <input type="text" th:field="*{lastName}"
+               class="form-control mb-4 col-4" placeholder="Last name">
 
-         <input type="text" th:field="*{email}"
-                class="form-control mb-4 col-4" placeholder="Email">
+        <input type="text" th:field="*{email}"
+               class="form-control mb-4 col-4" placeholder="Email">
 
-         <input type="password" th:field="*{password}"
-                class="form-control mb-4 col-4" placeholder="password">
+        <input type="password" th:field="*{password}"
+               class="form-control mb-4 col-4" placeholder="password">
 
-         <label for="roles">User roles (multiple select):</label>
-         <br/>
-         <select id="roles" required multiple="multiple" class="form-control mb-4 col-4" name="roles">
+        <label for="roles">User roles (multiple select):</label>
+        <br/>
+        <select id="roles" required multiple="multiple" class="form-control mb-4 col-4" name="roles">
 
-             <option th:each="role : ${roles}"
-                     th:value="${{role.id}}"
-                     th:selected="${#lists.contains(user.roles,role)}"
-                     th:text="${role.name}"></option>
-         </select>
+            <option th:each="role : ${roles}"
+                    th:value="${{role.id}}"
+                    th:selected="${#lists.contains(user.roles,role)}"
+                    th:text="${role.name}"></option>
+        </select>
 
-         <button type="submit" class="btn btn-info col-2">Save</button>
+        <button type="submit" class="btn btn-info col-2">Save</button>
 
-     </form>
+        <!-- <div sec:authorize="hasRole('ROLE_ADMIN')">
+          </div> -->
+    </form>
 
-     <hr>
-     <a th:href="@{/}">Back to User List</a>
+    <hr>
+    <div sec:authorize="hasRole('ADMIN')">
+        <a th:href="@{/users/list}">Back to User List</a>
+    </div>
+    <!-- Add a logout button -->
+    <form action="#" th:action="@{/logout}"
+          method="POST">
 
- </div>
- </body>
+        <input type="submit" value="Logout" class="btn btn-outline-primary mt-2"/>
 
- </html>
+    </form>
+
+</div>
+
+</body>
+
+</html>
 
 
 

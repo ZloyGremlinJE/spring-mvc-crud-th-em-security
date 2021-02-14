@@ -30,6 +30,11 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
+    public User getUserByName(String s) {
+        return userDAO.getUserByName(s);
+    }
+
+    @Override
     @Transactional
     public void saveUser(User theUser) {
 

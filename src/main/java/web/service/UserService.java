@@ -14,6 +14,6 @@ public interface UserService {
 
     void deleteUser(int theId);
 
-
+    User getUserByName(String s);
 
 }
