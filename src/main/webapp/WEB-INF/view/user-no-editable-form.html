@@ -28,38 +28,34 @@
         <!-- Add hidden form field to handle update -->
         <input type="hidden" th:field="*{id}"/>
 
-        <input type="text" th:field="*{userName}"
+        <input type="text" th:field="*{userName} "
+                           th:disabled="true"
                class="form-control mb-4 col-4" placeholder="login">
 
         <input type="text" th:field="*{firstName}"
+                           th:disabled="true"
                class="form-control mb-4 col-4" placeholder="First name">
 
         <input type="text" th:field="*{lastName}"
+                           th:disabled="true"
                class="form-control mb-4 col-4" placeholder="Last name">
 
         <input type="text" th:field="*{email}"
+                           th:disabled="true"
                class="form-control mb-4 col-4" placeholder="Email">
 
-            <input type="password" th:field="*{password}"
-                   class="form-control mb-4 col-4" placeholder="password">
+        <label for="roles">User roles:</label>
+        <br/>
+        <select id="roles" required multiple="multiple" class="form-control mb-4 col-4" name="roles" th:disabled="true">
 
-            <label for="roles">User roles (multiple select):</label>
-            <br/>
-            <select id="roles" required multiple="multiple" class="form-control mb-4 col-4" name="roles">
-
-                <option th:each="role : ${roles}"
-                        th:value="${{role.id}}"
-                        th:selected="${#lists.contains(user.roles,role)}"
-                        th:text="${role.name}"></option>
-            </select>
-
-            <button type="submit" class="btn btn-info col-2">Save</button>
+            <option th:each="role : ${user.roles}"
+                    th:value="${{role.id}}"
+                    th:text="${role.name}"></option>
+        </select>
 
     </form>
 
     <hr>
-
-        <a th:href="@{/admin/list}">Back to User List</a>
 
     <!-- Add a logout button -->
     <form action="#" th:action="@{/logout}"
