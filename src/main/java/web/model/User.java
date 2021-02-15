@@ -3,7 +3,6 @@ package web.model;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.HashSet;
@@ -11,7 +10,7 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity
-@Table(name = "users")
+@Table(name = "users", uniqueConstraints = {@UniqueConstraint(columnNames = "user_name")})
 public class User implements UserDetails {
 
     @Id
@@ -19,7 +18,7 @@ public class User implements UserDetails {
     @Column(name = "id")
     private int id;
 
-    @Column (name = "user_name")
+    @Column(name = "user_name")
     private String userName;
 
     @Column(name = "first_name")
@@ -31,12 +30,11 @@ public class User implements UserDetails {
     @Column(name = "email")
     private String email;
 
-    @Column (name= "password")
+    @Column(name = "password")
     private String password;
 
-
     @ManyToMany(fetch = FetchType.EAGER,
-            cascade = {CascadeType.PERSIST,CascadeType.MERGE})
+            cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Set<Role> roles = new HashSet<>();
 
     public User() {
@@ -50,7 +48,6 @@ public class User implements UserDetails {
     public void setId(int id) {
         this.id = id;
     }
-
 
     public String getUserName() {
         return userName;
@@ -100,7 +97,7 @@ public class User implements UserDetails {
         this.roles = roles;
     }
 
-    public void addRole(Role role){
+    public void addRole(Role role) {
         roles.add(role);
     }
 
@@ -124,7 +121,7 @@ public class User implements UserDetails {
         return true;
     }
 
-   @Override
+    @Override
     public boolean isCredentialsNonExpired() {
         return true;
     }

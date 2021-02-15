@@ -1,6 +1,5 @@
 <!DOCTYPE HTML>
-<html lang="en" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <!-- Required meta tags -->
@@ -21,7 +20,7 @@
     <h3>User Directory</h3>
     <hr>
 
-    <p class="h4 mb-4">User data</p>
+    <p class="h4 mb-4">Save/Update User</p>
 
     <form action="#" th:action="@{/admin/saveUser}"
           th:object="${user}" method="POST">
@@ -40,26 +39,26 @@
         <input type="text" th:field="*{email}"
                class="form-control mb-4 col-4" placeholder="Email">
 
-            <input type="password" th:field="*{password}"
-                   class="form-control mb-4 col-4" placeholder="password">
+        <input type="password" th:field="*{password}"
+               class="form-control mb-4 col-4" placeholder="password">
 
-            <label for="roles">User roles (multiple select):</label>
-            <br/>
-            <select id="roles" required multiple="multiple" class="form-control mb-4 col-4" name="roles">
+        <label for="roles">User roles (multiple select):</label>
+        <br/>
+        <select id="roles" required multiple="multiple" class="form-control mb-4 col-4" name="roles">
 
-                <option th:each="role : ${roles}"
-                        th:value="${{role.id}}"
-                        th:selected="${#lists.contains(user.roles,role)}"
-                        th:text="${role.name}"></option>
-            </select>
+            <option th:each="role : ${roles}"
+                    th:value="${{role.id}}"
+                    th:selected="${#lists.contains(user.roles,role)}"
+                    th:text="${role.name}"></option>
+        </select>
 
-            <button type="submit" class="btn btn-info col-2">Save</button>
+        <button type="submit" class="btn btn-info col-2">Save</button>
 
     </form>
 
     <hr>
 
-        <a th:href="@{/admin/list}">Back to User List</a>
+    <a th:href="@{/admin/list}">Back to User List</a>
 
     <!-- Add a logout button -->
     <form action="#" th:action="@{/logout}"

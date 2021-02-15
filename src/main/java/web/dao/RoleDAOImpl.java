@@ -20,7 +20,6 @@ public class RoleDAOImpl implements RoleDAO {
         return query.getResultList();
     }
 
-
     @Override
     public Role getRole(int id) {
         Role t = entityManager.find(Role.class, id);

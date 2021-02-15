@@ -1,6 +1,5 @@
 <!DOCTYPE HTML>
-<html lang="en" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <!-- Required meta tags -->
@@ -29,19 +28,19 @@
         <input type="hidden" th:field="*{id}"/>
 
         <input type="text" th:field="*{userName} "
-                           th:disabled="true"
+               th:disabled="true"
                class="form-control mb-4 col-4" placeholder="login">
 
         <input type="text" th:field="*{firstName}"
-                           th:disabled="true"
+               th:disabled="true"
                class="form-control mb-4 col-4" placeholder="First name">
 
         <input type="text" th:field="*{lastName}"
-                           th:disabled="true"
+               th:disabled="true"
                class="form-control mb-4 col-4" placeholder="Last name">
 
         <input type="text" th:field="*{email}"
-                           th:disabled="true"
+               th:disabled="true"
                class="form-control mb-4 col-4" placeholder="Email">
 
         <label for="roles">User roles:</label>

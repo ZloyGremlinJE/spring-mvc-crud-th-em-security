@@ -1,7 +1,6 @@
 package web.service;
 
 import web.model.Role;
-
 import java.util.Collection;
 
 public interface RoleService {

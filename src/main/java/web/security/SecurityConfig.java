@@ -12,7 +12,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Configuration
-@EnableWebSecurity(debug = true)
+@EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private final UserDetailsService userDetailsService; // сервис, с помощью которого тащим пользователя
     private final SuccessUserHandler successUserHandler; // класс, в котором описана логика перенаправления пользователей по ролям
@@ -29,13 +29,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        // http.csrf().disable(); - попробуйте выяснить сами, что это даёт
-
-        http.authorizeRequests()
-                .antMatchers("/admin/list").hasAnyRole("ADMIN")
-                .antMatchers("/admin/save").hasAnyRole("ADMIN")
-                .antMatchers("/admin/delete").hasAnyRole("ADMIN")
-                .antMatchers("/user/showFormUser").hasAnyRole("USER")
+        http.csrf()
+                .disable() //- попробуйте выяснить сами, что это даёт
+                .authorizeRequests()
+                .antMatchers("/admin/*").hasAnyRole("ADMIN")
+                .antMatchers("/user/*").hasAnyRole("USER", "ADMIN")
                 .antMatchers("/resources/**").permitAll()
                 .and()
                 .formLogin().successHandler(successUserHandler)
