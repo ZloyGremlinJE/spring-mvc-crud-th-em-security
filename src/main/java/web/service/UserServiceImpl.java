@@ -1,26 +1,23 @@
 package web.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import web.dao.RoleDAO;
 import web.dao.UserDAO;
-import web.model.Role;
 import web.model.User;
 
 import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
-public class UserServiceImpl implements UserService, UserDetailsService {
+public class UserServiceImpl implements UserService {
 
-    @Autowired
     private UserDAO userDAO;
 
     @Autowired
-    private RoleDAO roleDAO;
+    public UserServiceImpl(UserDAO userDAO) {
+        this.userDAO = userDAO;
+    }
 
     @Override
     @Transactional
@@ -52,20 +49,4 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         userDAO.deleteUser(theId);
     }
 
-
-    @Override
-    @Transactional
-    public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-        User currentUser = userDAO.getUserByName(s);
-        if (currentUser == null) {
-            throw new UsernameNotFoundException("Unknown user: " + s);
-        }
-
-        UserDetails user = org.springframework.security.core.userdetails.User.builder()
-                .username(currentUser.getUserName())
-                .password(currentUser.getPassword())
-                .roles(currentUser.getRoles().stream().map(Role::getName).toArray(String[]::new))
-                .build();
-        return user;
-    }
 }

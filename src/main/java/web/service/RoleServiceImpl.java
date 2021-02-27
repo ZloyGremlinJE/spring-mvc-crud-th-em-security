@@ -10,8 +10,12 @@ import java.util.Collection;
 @Service
 public class RoleServiceImpl implements RoleService{
 
-    @Autowired
     private RoleDAO roleDAO;
+
+    @Autowired
+    public RoleServiceImpl(RoleDAO roleDAO) {
+        this.roleDAO = roleDAO;
+    }
 
     @Transactional
     @Override
